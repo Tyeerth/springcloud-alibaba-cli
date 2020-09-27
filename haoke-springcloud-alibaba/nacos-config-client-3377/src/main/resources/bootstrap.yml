@@ -1,0 +1,19 @@
+server:
+  port: 3377
+  # Nacos 为了同spring cloud-config一样，在项目初始化的时候，要保证先从配置中心（nacos）进行配置拉取
+  #拉取配置之后才能保证正常的启动
+  #启动优先级----》bootstrap优先于applicaiton.yml
+
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #服务注册中心地址
+      config:
+        server-addr: localhost:8848 #配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+
+#  ${prefix}-${spring.profile.active}.${file-extension}
+  #   nacos-config-client-dev.yaml  说明是配置这样一个文件名传入到nacos。
